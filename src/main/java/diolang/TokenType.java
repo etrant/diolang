@@ -1,4 +1,4 @@
-package com.github.etrant1.diolang;
+package diolang;
 
 public enum TokenType {
     // Single-character tokens.
@@ -17,7 +17,7 @@ public enum TokenType {
     // Keywords.
     AND, ELSE, FALSE, FUNCTION, IF, NULL, OR,
     PRINT, RETURN, TRUE, VAR, WHILE, OBJECT,
-    BREAK, VAR_TERMINATOR,
+    BREAK, OBJECT_TERMINATOR,
 
     EOF
 }

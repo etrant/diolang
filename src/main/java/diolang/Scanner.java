@@ -1,11 +1,13 @@
-package com.github.etrant1.diolang;
+package diolang;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.etrant1.diolang.TokenType.*;
+import static diolang.TokenType.*;
 
 public class Scanner {
     private final String source;
@@ -18,16 +20,15 @@ public class Scanner {
 
     static {
         keywords = new HashMap<>();
-        keywords.put("OH?",    IF);
+        keywords.put("OH?", IF);
         keywords.put("INSTEAD OF RUNNING AWAY, YOU'RE COMING RIGHT TO ME?",   ELSE);
-        keywords.put("MUDA! MUDA! MUDA! MUDA! MUDA!",  WHILE);
-        keywords.put("HOHO",    FUNCTION);
+        keywords.put("IF YOUD RATHER DIE THEN CLIMB THOSE STAIRS.",  WHILE);
+        keywords.put("TAKE THIS USELESS WORLD FOR ALL YOU CAN GET.",    FUNCTION);
         keywords.put("GOODBYE, JOJO!",   RETURN);
         keywords.put("SPEEDWAGON",  TRUE);
         keywords.put("DARIO",    FALSE);
-        keywords.put("KONO",   VAR);
-        keywords.put("DA!",   VAR_TERMINATOR);
-        keywords.put("GO OUT THERE AND TAKE THIS USELESS WORLD FOR ALL YOU CAN GET!",  OBJECT);
+        keywords.put("STAND POWER!",   OBJECT);
+        keywords.put("MENACING...",  VAR);
         keywords.put("HINJAKU!",    NULL);
         keywords.put("WRYYY!",   PRINT);
         keywords.put("I DON'T LET ANYONE SWAGGER OVER ME!",  AND);
@@ -76,7 +77,6 @@ public class Scanner {
                 addToken(match('=') ? GREATER_EQUAL : GREATER);
                 break;
 
-
             case 'ゴ':
                 // Comment
                 if (match('ゴ')) {
@@ -110,14 +110,24 @@ public class Scanner {
     }
 
     private void addToken(TokenType type, Object literal) {
-        String text = source.substring(start, current);
+        String text = source.substring(start, current++);
         tokens.add(new Token(type, text, literal, line));
     }
     private void identifier() {
         while (isAlphaNumeric(peek())) advance();
-        // TODO: Space-separated keywords
         String text = source.substring(start, current);
-        TokenType type = keywords.get(text);
+        TokenType type = null;
+
+        for ( String key : keywords.keySet() ) {
+            String firstWord = key.split(" ")[0];
+            String fullSentence = StringUtils.substring(key, start, key.length() + start);
+            if (text.equals(firstWord) && key.equals(fullSentence)) {
+                type = keywords.get(key);
+                current = key.length() + start;
+                break;
+            }
+        }
+
         if (type == null) type = IDENTIFIER;
         addToken(type);
     }
@@ -194,4 +204,3 @@ public class Scanner {
 }
 
 // TODO: Implied semicolons
-// Commit, move to next task

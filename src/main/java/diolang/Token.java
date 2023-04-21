@@ -1,4 +1,4 @@
-package com.github.etrant1.diolang;
+package diolang;
 
 public class Token {
     final TokenType type;

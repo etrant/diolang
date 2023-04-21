@@ -26,6 +26,7 @@ public class Dio {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
         tempTokens = tokens;
+
         // TODO: For now, just print the tokens.
         for (Token token : tokens) {
             System.out.println(token);

@@ -22,7 +22,7 @@ public class Scanner {
         keywords = new HashMap<>();
         keywords.put("OH?", IF);
         keywords.put("INSTEAD OF RUNNING AWAY, YOU'RE COMING RIGHT TO ME?",   ELSE);
-        keywords.put("IF YOUD RATHER DIE THEN CLIMB THOSE STAIRS.",  WHILE);
+        keywords.put("IF YOU'D RATHER DIE THEN CLIMB THOSE STAIRS.",  WHILE);
         keywords.put("TAKE THIS USELESS WORLD FOR ALL YOU CAN GET.",    FUNCTION);
         keywords.put("GOODBYE, JOJO!",   RETURN);
         keywords.put("SPEEDWAGON",  TRUE);
@@ -62,8 +62,6 @@ public class Scanner {
             case '-': addToken(MINUS); break;
             case '+': addToken(PLUS); break;
             case '*': addToken(STAR); break;
-            case '/': addToken(SLASH); break;
-            case '"': string(); break;
             case '!':
                 addToken(match('=') ? BANG_EQUAL : BANG);
                 break;
@@ -76,23 +74,23 @@ public class Scanner {
             case '>':
                 addToken(match('=') ? GREATER_EQUAL : GREATER);
                 break;
-
-            case 'ゴ':
-                // Comment
-                if (match('ゴ')) {
+            case '/':
+                if (match('/')) {
                     while (peek() != '\n' && !isAtEnd()) advance();
                 }
+                else {
+                    addToken(SLASH);
+                }
                 break;
-
+            case '"': string(); break;
             case ' ':
             case '\r':
             case '\t':
                 break;
-
             case '\n':
+                addToken(NEWLINE);
                 line++;
                 break;
-
             default:
                 if (isDigit(c)){
                     number();
@@ -110,7 +108,7 @@ public class Scanner {
     }
 
     private void addToken(TokenType type, Object literal) {
-        String text = source.substring(start, current++);
+        String text = source.substring(start, current);
         tokens.add(new Token(type, text, literal, line));
     }
     private void identifier() {
@@ -120,7 +118,7 @@ public class Scanner {
 
         for ( String key : keywords.keySet() ) {
             String firstWord = key.split(" ")[0];
-            String fullSentence = StringUtils.substring(key, start, key.length() + start);
+            String fullSentence = StringUtils.substring(source, start, start + key.length());
             if (text.equals(firstWord) && key.equals(fullSentence)) {
                 type = keywords.get(key);
                 current = key.length() + start;
@@ -202,5 +200,3 @@ public class Scanner {
         return current >= source.length();
     }
 }
-
-// TODO: Implied semicolons

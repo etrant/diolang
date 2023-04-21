@@ -18,7 +18,7 @@ public class DioTest {
 
     @Test
     public void testRun2() {
-        String src = "IF YOUD RATHER DIE THEN CLIMB THOSE STAIRS.";
+        String src = "IF YOU'D RATHER DIE THEN CLIMB THOSE STAIRS.";
         Dio.run(src);
 
         Assert.assertEquals(TokenType.WHILE.name(), Dio.tempTokens.get(0).type.name());
@@ -38,5 +38,20 @@ public class DioTest {
         Dio.run(src);
 
         Assert.assertEquals(src, Dio.tempTokens.get(0).lexeme);
+    }
+
+    @Test
+    public void testRun5() {
+        String src = "// The dog goes woof, the cat goes meow";
+        Dio.run(src);
+
+        Assert.assertEquals(TokenType.EOF.name(), Dio.tempTokens.get(0).type.name());
+    }
+    @Test
+    public void testRun6() {
+        String src = "// The dog goes woof, the cat goes meow\nINSTEAD OF RUNNING AWAY, YOU'RE COMING RIGHT TO ME?";
+        Dio.run(src);
+
+        Assert.assertEquals(TokenType.NEWLINE.name(), Dio.tempTokens.get(0).type.name());
     }
 }

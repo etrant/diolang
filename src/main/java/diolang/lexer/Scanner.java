@@ -1,5 +1,8 @@
-package diolang;
+package diolang.lexer;
 
+import diolang.Dio;
+import diolang.Token;
+import diolang.TokenType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -22,21 +25,22 @@ public class Scanner {
         keywords = new HashMap<>();
         keywords.put("OH?", IF);
         keywords.put("INSTEAD OF RUNNING AWAY, YOU'RE COMING RIGHT TO ME?",   ELSE);
-        keywords.put("IF YOU'D RATHER DIE THEN CLIMB THOSE STAIRS.",  WHILE);
+        keywords.put("IF YOU'D RATHER DIE THEN CLIMB THOSE STAIRS.",    WHILE);
         keywords.put("TAKE THIS USELESS WORLD FOR ALL YOU CAN GET.",    FUNCTION);
-        keywords.put("GOODBYE, JOJO!",   RETURN);
+        keywords.put("GOODBYE, JOJO!",  RETURN);
         keywords.put("SPEEDWAGON",  TRUE);
-        keywords.put("DARIO",    FALSE);
+        keywords.put("DARIO",   FALSE);
         keywords.put("STAND POWER!",   OBJECT);
         keywords.put("MENACING...",  VAR);
         keywords.put("HINJAKU!",    NULL);
         keywords.put("WRYYY!",   PRINT);
-        keywords.put("I DON'T LET ANYONE SWAGGER OVER ME!",  AND);
-        keywords.put("ORA!",  OR);
+        keywords.put("AND",  AND);
+        keywords.put("OR",  OR);
+        keywords.put("NOT", NOT);
         keywords.put("ZA WARUDO!",  BREAK);
     }
 
-    Scanner(String source) {
+    public Scanner(String source) {
         this.source = source;
     }
 
@@ -59,7 +63,7 @@ public class Scanner {
             case '}': addToken(RIGHT_BRACE); break;
             case ',': addToken(COMMA); break;
             case '.': addToken(DOT); break;
-            case '-': addToken(MINUS); break;
+            case '-': addToken(DASH); break;
             case '+': addToken(PLUS); break;
             case '*': addToken(STAR); break;
             case '!':

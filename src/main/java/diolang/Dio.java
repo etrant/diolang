@@ -1,5 +1,7 @@
 package diolang;
 
+import diolang.lexer.Scanner;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -32,7 +34,7 @@ public class Dio {
             System.out.println(token);
         }
     }
-    static void error(int line, String message) {
+    public static void error(int line, String message) {
         report(line, "", message);
     }
 

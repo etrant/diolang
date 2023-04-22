@@ -1,8 +1,5 @@
-package diolang.lexer;
+package diolang;
 
-import diolang.Dio;
-import diolang.Token;
-import diolang.TokenType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -61,7 +58,6 @@ public class Scanner {
             case ')': addToken(RIGHT_PAREN); break;
             case '{': addToken(LEFT_BRACE); break;
             case '}': addToken(RIGHT_BRACE); break;
-            case ',': addToken(COMMA); break;
             case '.': addToken(DOT); break;
             case '-': addToken(DASH); break;
             case '+': addToken(PLUS); break;

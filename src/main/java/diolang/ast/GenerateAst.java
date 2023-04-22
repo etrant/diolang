@@ -2,6 +2,7 @@ package diolang.ast;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class GenerateAst {
     }
     private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {
         String path = outputDir + "/" + baseName + ".java";
-        PrintWriter writer = new PrintWriter(path, "UTF-8");
+        PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
 
         writer.println("package diolang.ast;");
         writer.println();
@@ -45,6 +46,7 @@ public class GenerateAst {
         writer.println("  abstract <T> T accept(Visitor<T> visitor);");
 
         writer.println("}");
+        writer.println();
         writer.close();
     }
     private static void defineType(PrintWriter writer, String baseName, String className, String fieldList) {
@@ -78,6 +80,7 @@ public class GenerateAst {
         }
 
         writer.println("  }");
+        writer.println();
     }
     private static void defineVisitor(
         PrintWriter writer, String baseName, List<String> types) {
@@ -90,6 +93,7 @@ public class GenerateAst {
         }
 
         writer.println("  }");
+        writer.println();
     }
 }
 

@@ -1,6 +1,8 @@
 package diolang;
 
-import diolang.lexer.Scanner;
+import diolang.ast.AstPrinter;
+import diolang.ast.Parser;
+import diolang.ast.Expr;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,15 +29,24 @@ public class Dio {
     public static void run(String source) {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
-        tempTokens = tokens;
 
-        // TODO: For now, just print the tokens.
-        for (Token token : tokens) {
-            System.out.println(token);
-        }
+        Parser parser = new Parser(tokens);
+        Expr expression = parser.parse();
+
+        if (hadError) return;
+
+        System.out.println(new AstPrinter().print(expression));
     }
     public static void error(int line, String message) {
         report(line, "", message);
+    }
+
+    public static void error(Token token, String message) {
+        if (token.type == TokenType.EOF) {
+            report(token.line, " at end", message);
+        } else {
+            report(token.line, " at '" + token.lexeme + "'", message);
+        }
     }
 
     private static void report(int line, String where, String message) {

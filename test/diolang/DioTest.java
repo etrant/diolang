@@ -24,7 +24,7 @@ public class DioTest {
 
     @Test
     public void testRun3() {
-        String src = "I DON'T LET ANYONE SWAGGER OVER ME!";
+        String src = "AND";
         Dio.run(src);
 
         Assert.assertEquals(TokenType.AND.name(), Dio.tempTokens.get(0).type.name());

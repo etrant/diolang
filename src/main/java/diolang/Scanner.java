@@ -21,10 +21,10 @@ public class Scanner {
     static {
         keywords = new HashMap<>();
         keywords.put("OH?", IF);
-        keywords.put("INSTEAD OF RUNNING AWAY, YOU'RE COMING RIGHT TO ME?",   ELSE);
+        keywords.put("INSTEAD OF RUNNING AWAY YOU'RE COMING RIGHT TO ME?",   ELSE);
         keywords.put("IF YOU'D RATHER DIE THEN CLIMB THOSE STAIRS.",    WHILE);
-        keywords.put("TAKE THIS USELESS WORLD FOR ALL YOU CAN GET.",    FUNCTION);
-        keywords.put("GOODBYE, JOJO!",  RETURN);
+        keywords.put("I'VE ABANDONED MY HUMANITY JOJO!",    FUNCTION);
+        keywords.put("GOODBYE JOJO!",  RETURN);
         keywords.put("SPEEDWAGON",  TRUE);
         keywords.put("DARIO",   FALSE);
         keywords.put("STAND POWER!",  VAR);
@@ -56,6 +56,7 @@ public class Scanner {
             case ')': addToken(RIGHT_PAREN); break;
             case '{': addToken(LEFT_BRACE); break;
             case '}': addToken(RIGHT_BRACE); break;
+            case '-': addToken(DASH); break;
             case '+': addToken(PLUS); break;
             case '*': addToken(STAR); break;
             case ',': addToken(COMMA); break;
@@ -168,7 +169,11 @@ public class Scanner {
     }
 
     private boolean isAlphaNumeric(char c) {
-        return isAlpha(c) || isDigit(c);
+        return isAlpha(c) || isDigit(c) || isPunctuation(c);
+    }
+
+    private boolean isPunctuation(char c) {
+        return (c == '!' || c == '?' || c == '.' || c == '\'');
     }
 
     private char peekNext() {

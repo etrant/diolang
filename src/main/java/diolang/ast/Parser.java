@@ -132,7 +132,12 @@ public class Parser {
 
     private Stmt printStatement() {
         Expr value = expression();
+        if (peek().type == EOF) {
+            return new Stmt.Print(value);
+        }
+        if (check(EOF)) return new Stmt.Print(value);
         consume(NEWLINE, "Expect '\\n' after value.");
+        while (check(NEWLINE)) advance();
         return new Stmt.Print(value);
     }
 
@@ -177,11 +182,18 @@ public class Parser {
     private List<Stmt> block() {
         List<Stmt> statements = new ArrayList<>();
 
+        consume(NEWLINE, "Expect '\\n' before stmtList.");
         while (!check(RIGHT_BRACE) && !isAtEnd()) {
             statements.add(declaration());
         }
 
         consume(RIGHT_BRACE, "Expect '}' after block.");
+
+        if (peek().type == EOF) {
+            return statements;
+        }
+        consume(NEWLINE, "Expect '\\n' after block.");
+        while (check(NEWLINE)) advance();
         return statements;
     }
 

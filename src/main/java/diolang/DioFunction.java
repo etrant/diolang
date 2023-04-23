@@ -28,7 +28,6 @@ class DioFunction implements DioCallable {
             return returnValue.value;
         }
 
-        interpreter.executeBlock(declaration.body, environment);
         return null;
     }
 

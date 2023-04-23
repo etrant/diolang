@@ -45,7 +45,4 @@ class Environment {
         if (values.containsKey(lexeme)) throw new RuntimeError(name,"Variable \"" + lexeme + "\" is already defined");
         values.put(lexeme, value);
     }
-    void define(String name, Object value) {
-        values.put(name, value);
-    }
 }

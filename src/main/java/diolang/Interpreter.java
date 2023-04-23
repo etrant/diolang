@@ -80,12 +80,10 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>  {
             arguments.add(evaluate(argument));
         }
 
-        if (!(callee instanceof DioCallable)) {
+        if (!(callee instanceof DioCallable function)) {
             throw new RuntimeError(expr.paren,
-                    "Can only call functions and classes.");
+                    "Can only call functions.");
         }
-
-        DioCallable function = (DioCallable)callee;
 
         if (arguments.size() != function.arity()) {
             throw new RuntimeError(expr.paren, "Expected " +

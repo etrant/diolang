@@ -6,7 +6,7 @@ A Java-based interpreter inspired by famous quotes by Dio Brando from Jojo’s B
 ```
 wget https://github.com/etrant1/diolang/releases/tag/production/diolang.jar
 echo -e "WRYYY! \"Hello Warudo\"" > hello.dio
-java -jar ArnoldC.jar hello.dio
+java -jar diolang.jar hello.dio
 ```
 
 ## Contributors

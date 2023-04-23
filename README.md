@@ -13,8 +13,8 @@ java -jar ArnoldC.jar hello.dio
 Ethan Trant, Kristopher Small, and Guranggad Singh.
 
 ## Inspirations
-Jojo's Bizzare Adventure by Hirohiko Araki
-ArnoldC 
+- Jojo's Bizzare Adventure by Hirohiko Araki
+- ArnoldC 
 
 ## References
 https://craftinginterpreters.com/

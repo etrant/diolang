@@ -27,14 +27,12 @@ public class Scanner {
         keywords.put("GOODBYE, JOJO!",  RETURN);
         keywords.put("SPEEDWAGON",  TRUE);
         keywords.put("DARIO",   FALSE);
-        keywords.put("STAND POWER!",   OBJECT);
-        keywords.put("MENACING...",  VAR);
+        keywords.put("STAND POWER!",  VAR);
         keywords.put("HINJAKU!",    NULL);
         keywords.put("WRYYY!",   PRINT);
         keywords.put("AND",  AND);
         keywords.put("OR",  OR);
         keywords.put("NOT", NOT);
-        keywords.put("ZA WARUDO!",  BREAK);
     }
 
     public Scanner(String source) {
@@ -61,8 +59,6 @@ public class Scanner {
             case '+': addToken(PLUS); break;
             case '*': addToken(STAR); break;
             case ',': addToken(COMMA); break;
-            case '-': addToken(match('>') ? ARROW : DASH);
-                break;
             case '!':
                 addToken(match('=') ? BANG_EQUAL : BANG);
                 break;

@@ -1,6 +1,6 @@
 # diolang
 
-A Java-based programming interpreter inspired by famous quotes from Jojo’s Bizarre Adventure!
+A Java-based interpreter inspired by famous quotes by Dio Brando from Jojo’s Bizarre Adventure!
 
 ## Quick Start
 wget http://etrant1.github.io/diolang.jar

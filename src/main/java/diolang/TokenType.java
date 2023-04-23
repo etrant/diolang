@@ -3,14 +3,14 @@ package diolang;
 public enum TokenType {
     // Single-character tokens.
     LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
-    DOT, DASH, PLUS, SLASH, STAR,
+    DASH, PLUS, SLASH, STAR, COMMA,
 
     // One or two character tokens.
     BANG, BANG_EQUAL,
     EQUAL, EQUAL_EQUAL,
     GREATER, GREATER_EQUAL,
     LESS, LESS_EQUAL,
-    NEWLINE,
+    NEWLINE, ARROW,
 
     // Literals.
     IDENTIFIER, STRING, NUMBER,

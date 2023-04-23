@@ -58,10 +58,11 @@ public class Scanner {
             case ')': addToken(RIGHT_PAREN); break;
             case '{': addToken(LEFT_BRACE); break;
             case '}': addToken(RIGHT_BRACE); break;
-            case '.': addToken(DOT); break;
-            case '-': addToken(DASH); break;
             case '+': addToken(PLUS); break;
             case '*': addToken(STAR); break;
+            case ',': addToken(COMMA); break;
+            case '-': addToken(match('>') ? ARROW : DASH);
+                break;
             case '!':
                 addToken(match('=') ? BANG_EQUAL : BANG);
                 break;
